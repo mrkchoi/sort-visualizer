@@ -14,7 +14,7 @@ The project will also include:
  - [X] Data visualization built with d3.js
 
 ## Wireframes
-The app will be a single screen, housing a primary dj.js container where algorithms are rendering in realtime.
+The app will be a single screen, housing a primary d3.js container where algorithms are rendering in realtime.
 
 ![wireframe](pending...)
 
