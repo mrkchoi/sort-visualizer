@@ -55,3 +55,6 @@ This app will be implemented using the following technologies:
  - [X] Complete text animations + container/dataset transitions 
  - [X] Production README.md
  - [X] Deploy to GitHub pages
+
+#### Bonus features:
+ - [X] Add visualizations for selection, insertion & bogo sort
