@@ -1,0 +1,5 @@
+.main__container--inner {
+  max-width: 1000px;
+  margin: 0 auto;
+  background-color: pink;
+}

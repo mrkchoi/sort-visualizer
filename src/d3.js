@@ -1,6 +1,6 @@
 
 // D3 test
-d3.selectAll('p').style('color', 'darkblue').style('font-size', '24px');
+d3.selectAll('p').style('color', 'darkblue');
 
 let fruits = ['apple', 'mango', 'banana', 'orange'];
 
@@ -21,6 +21,7 @@ d3.select('ul')
   //   .attr('fill', 'green');
 
 let data = [80, 100, 56, 120, 180, 30, 40, 120, 160];
+data = data.map(el => el / 10);
 
 let svgWidth = 500;
 let svgHeight = 300;
@@ -32,15 +33,19 @@ let svg = d3.select('svg')
   .attr('width', svgWidth)
   .attr('height', svgHeight);
 
+let yScale = d3.scaleLinear()
+  .domain([0, d3.max(data)])
+  .range([0, svgHeight]);
+
 let barChart = svg.selectAll('rect')
   .data(data)
   .enter()
   .append('rect')
   .attr('y', function(d) {
-    return svgHeight - d
+    return svgHeight - yScale(d);
   })
   .attr('height', function(d) {
-    return d;
+    return yScale(d);
   })
   .attr('width', barWidth - barPadding)
   .attr('class', 'bar')
