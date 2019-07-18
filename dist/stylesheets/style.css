@@ -1,9 +1,14 @@
 .main__container--inner {
   max-width: 1000px;
   margin: 0 auto;
-  background-color: pink;
+  padding: 1rem;
+  /* background-color: pink; */
 }
 
 .rect.bar {
   fill: white; 
+}
+
+#chart-area svg {
+  border: 1px solid gray;
 }

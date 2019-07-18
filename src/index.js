@@ -1,6 +1,7 @@
 import _ from 'lodash';
 import './d3.js';
 import './algorithms/bubble_sort.js';
+import './test/test.js';
 
 function component() {
   const element = document.createElement('div');

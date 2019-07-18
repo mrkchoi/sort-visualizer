@@ -45,18 +45,22 @@ bubbleSort([10, 9, 8, 7, 6, 5, 4, 3, 2, 1]);
 // output
 /////////////// 
 
-// // console.log(sortStates);
+// console.log(sortStates);
 // sortStates.forEach(state => {
 //   // console.log(state);
-//   let spans = d3.selectAll('span')
-//     .data(state)
-//     .enter()
-//     .text(d => d)
+//   setTimeout(() => {
+    
+//     d3.select('.list')
+//       .selectAll('span')
+//       .data(state)
+//       .enter()
+//       .append('span')
+//       .text(d => `${d} `)
+    
+//   }, 200);
+//   // let spans = d3.selectAll('span')
+//   //   .data(state)
+//   //   .enter()
+//   //   .text(d => d)
 //   // let bubblesort = 
 // });
-
-let spans = d3.select('p')
-  .selectAll('span')
-  .data([1,2,3,4,5,6,7,8,9,10])
-  .enter()
-  .text(d => d)
