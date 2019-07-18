@@ -3,3 +3,7 @@
   margin: 0 auto;
   background-color: pink;
 }
+
+.rect.bar {
+  fill: white; 
+}

@@ -31,7 +31,8 @@ let barWidth = svgWidth / data.length;
 
 let svg = d3.select('svg')
   .attr('width', svgWidth)
-  .attr('height', svgHeight);
+  .attr('height', svgHeight)
+  .domain();
 
 let yScale = d3.scaleLinear()
   .domain([0, d3.max(data)])
@@ -68,3 +69,4 @@ let text = svg.selectAll('text')
     return barWidth * i;
   })
   .attr('fill', '#A64C38');
+
