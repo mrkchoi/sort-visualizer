@@ -1,0 +1,36 @@
+{
+  "name": "js_project",
+  "version": "1.0.0",
+  "description": "visualizes notable sorting algorithms, written in JS & D3.js",
+  "private": true,
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "webpack": "npx webpack --watch --mode=development"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mrkchoi/sort-visualizer.git"
+  },
+  "keywords": [
+    "sorting",
+    "algorithms",
+    "visualizer",
+    "data",
+    "visualization"
+  ],
+  "author": "Kenneth Choi",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/mrkchoi/sort-visualizer/issues"
+  },
+  "homepage": "https://github.com/mrkchoi/sort-visualizer#readme",
+  "dependencies": {
+    "@babel/core": "^7.5.5",
+    "@babel/preset-env": "^7.5.5",
+    "babel-loader": "^8.0.6",
+    "lodash": "^4.17.14",
+    "webpack": "^4.36.1",
+    "webpack-cli": "^3.3.6"
+  }
+}
