@@ -1,19 +1,32 @@
 import _ from 'lodash';
 import './d3.js';
-import './algorithms/bubble_sort.js';
-import './test/test.js';
+import { runBubbleSort } from './algorithms/bubble_sort.js';
+import './algorithms/quick_sort';
 
-function component() {
-  const element = document.createElement('div');
+// import './test/test.js';
+// import './test/starbreak.js';
+// import './test/gapminder.js';
 
-  // Lodash, currently included via a script, is required for this line to work
-  element.innerHTML = _.join(['Hello', 'webpack'], ' ');
+let bubbleSortBtn = document.querySelector('.btn__bubblesort');
+bubbleSortBtn.addEventListener('click', handleSortClick);
 
-  return element;
+let svgCanvas = document.querySelector('#chart-area');
+
+function handleSortClick(e) {
+  e.preventDefault();
+
+  // reset svg canvas
+  svgCanvas.innerHTML = '';
+
+  console.log("clicked!");
+  
+  // run sort
+  let targetClassList = e.target.classList;
+  if (targetClassList.contains("btn__bubblesort")) {
+    runBubbleSort();
+  } else if (targetClassList.contains("btn__quicksort")) {
+    // runQuickSort();
+  } else if (targetClassList.contains("btn__mergesort")) {
+    // runMergeSort();
+  }
 }
-
-document.body.appendChild(component());
-
-
-
-

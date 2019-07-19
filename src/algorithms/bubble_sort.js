@@ -1,66 +1,201 @@
-///////////////
-//  input
-/////////////// 
-// let array = new Array(20)
+const setupRandomInput = require('./setup_input');
 
+// /////////////// 
+// // bubble sort
+// /////////////// 
 
-/////////////// 
-// test case
-/////////////// 
-// bubbleSort([10,9,8,7,6,5,4,3,2,1]) => 
-// [1,2,3,4,5,6,7,8,9,10]
+// array creation
+function runBubbleSort() {
+  let shuffledArr = setupRandomInput(50);
 
+  // this is our final input data
+  let data = [];
+  // this is our final input data
 
-let arr = [10, 9, 8, 7, 6, 5, 4, 3, 2, 1];
-let sortStates = [arr];
+  // algorithm
+  const bubbleSort = arr => {
+    let sorted = false;
 
+    while (!sorted) {
+      sorted = true;
 
-/////////////// 
-// bubble sort algorithm
-/////////////// 
-const bubbleSort = arr => {
-  let sorted = false;
-
-  while (!sorted) {
-    sorted = true;
-    
-    for (let i = 0; i < arr.length - 1; i++) {
-      if (arr[i] > arr[i + 1]) {
-        sorted = false;
-        [arr[i], arr[i + 1]] = [arr[i + 1], arr[i]];
-        let curState = [...arr];
-        sortStates.push(curState);
+      for (let i = 0; i < arr.length - 1; i++) {
+        if (arr[i] > arr[i + 1]) {
+          sorted = false;
+          [arr[i], arr[i + 1]] = [arr[i + 1], arr[i]];
+          let curState = [...arr];
+          data.push(curState);
+        }
       }
     }
+
+    data.push(arr);
+  };
+
+  // invoke algorithm and create sorted states in a 2d array
+  bubbleSort(shuffledArr);
+
+  ////////////////////////
+  // d3.js
+  ////////////////////////
+
+  // setup
+
+  let margin = { left: 0, right: 0, top: 0, bottom: 100 };
+  let height = 500 - margin.top - margin.bottom;
+  let width = 800 - margin.left - margin.right;
+
+  let g = d3
+    .select("#chart-area")
+    .append("svg")
+    .attr("width", width + margin.left + margin.right)
+    .attr("height", height + margin.top + margin.bottom)
+    .append("g")
+    .attr("transform", "translate(" + margin.left + ", " + margin.top + ")");
+
+  let time = 0;
+  let iteration = 0;
+
+  // Scales
+  let x = d3
+    .scaleLinear()
+    .domain([0, data[0].length])
+    .range([0, width]);
+  let y = d3
+    .scaleLinear()
+    .domain([0, data[0].length])
+    .range([height, 0]);
+  let area = d3
+    .scaleLinear()
+    .domain([0, data.length])
+    .range([0, 10]);
+  // let color = d3
+  //   .scaleSequential(d3.interpolateViridis)
+  //   .domain([0, data[0].length]);
+  let color = d3
+    .scaleSequential(d3.interpolateCubehelixDefault)
+    .domain([0, data[0].length]);
+  // let color = d3.scaleOrdinal(d3.schemePastel1);
+  // let color = d3.scaleOrdinal([
+  //   "#8dd3c7",
+  //   "#ffffb3",
+  //   "#bebada",
+  //   "#fb8072",
+  //   "#80b1d3",
+  //   "#fdb462",
+  //   "#b3de69",
+  //   "#fccde5",
+  //   "#d9d9d9",
+  //   "#bc80bd",
+  //   "#ccebc5",
+  //   "#ffed6f"
+  // ]);
+
+  // Labels
+  // let xLabel = g
+  //   .append("text")
+  //   .attr("y", height + 50)
+  //   .attr("x", width / 2)
+  //   .attr("font-size", "20px")
+  //   .attr("text-anchor", "middle")
+  //   .text("order");
+  // let yLabel = g
+  //   .append("text")
+  //   .attr("transform", "rotate(-90)")
+  //   .attr("y", -40)
+  //   .attr("x", -170)
+  //   .attr("font-size", "20px")
+  //   .attr("text-anchor", "middle")
+  //   .text("value");
+  let timeLabel = g
+    .append("text")
+    .attr("y", height + 60)
+    .attr("x", width - 40)
+    .attr("font-size", "40px")
+    .attr("opacity", "0.4")
+    .attr("text-anchor", "middle")
+    .text("0");
+
+  // X Axis
+  // let xAxisCall = d3
+  //   .axisBottom(x);
+  // g.append("g")
+  //   .attr("class", "x axis")
+  //   .attr("transform", "translate(0," + height + ")")
+  //   .call(xAxisCall);
+
+  // // Y Axis
+  // let yAxisCall = d3.axisLeft(y).tickFormat(function(d) {
+  //   return +d;
+  // });
+  // g.append("g")
+  //   .attr("class", "y axis")
+  //   .call(yAxisCall);
+
+  // d3.data(data).then(function(data) {
+  // Run the code every 0.1 second
+  let interval = d3.interval(function() {
+    // At the end of our data, loop back
+    time = time < data.length ? time + 1 : 0;
+    iteration = iteration < data[0].length ? iteration + 1 : 0;
+    // console.log(data);
+    update(data[time]);
+    if (time === data.length - 1) {
+      interval.stop();
+    }
+  }, 1);
+
+  // First run of the visualization
+  update(data[0]);
+  // });
+
+  function update(data) {
+    // Standard transition time for the visualization
+    let t = d3.transition().duration(1);
+
+    // JOIN new data with old elements.
+    let circles = g.selectAll("rect").data(data, function(d) {
+      return d;
+    });
+
+    // EXIT old elements not present in new data.
+    circles
+      .exit()
+      .attr("class", "exit")
+      .remove();
+
+    // ENTER new elements present in new data.
+    circles
+      .enter()
+      .append("rect")
+      .attr("class", "enter")
+      .attr("fill", function(d) {
+        return color(d);
+      })
+      .merge(circles)
+      .transition(t)
+      .attr("y", function(d, i) {
+        // return 0;
+        return y(d);
+      })
+      .attr("x", function(d, i) {
+        return x(i);
+      })
+      .attr("width", function(d) {
+        return 14;
+        // return d;
+      })
+      .attr("height", function(d) {
+        // return height;
+        return height - y(d);
+      });
+
+    // Update the time label
+    timeLabel.text(+time);
   }
-  sortStates.push(arr);
+    
+}
+
+module.exports = {
+  runBubbleSort: runBubbleSort
 };
-
-
-bubbleSort([10, 9, 8, 7, 6, 5, 4, 3, 2, 1]);
-
-
-
-/////////////// 
-// output
-/////////////// 
-
-// console.log(sortStates);
-// sortStates.forEach(state => {
-//   // console.log(state);
-//   setTimeout(() => {
-    
-//     d3.select('.list')
-//       .selectAll('span')
-//       .data(state)
-//       .enter()
-//       .append('span')
-//       .text(d => `${d} `)
-    
-//   }, 200);
-//   // let spans = d3.selectAll('span')
-//   //   .data(state)
-//   //   .enter()
-//   //   .text(d => d)
-//   // let bubblesort = 
-// });
