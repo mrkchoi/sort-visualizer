@@ -72,10 +72,17 @@ function generateChart() {
     let bubbleData = data["bubbleSort"];
     console.log(bubbleData);
     // debugger
-    d3.interval(function() {
+    let count = 0;
+    let interval = d3.interval(function() {
       update(bubbleData);
       flag = !flag;
+      count += 1;
+      if (count === bubbleData.length) {
+        interval.stop();
+        return;
+      }
     }, 500);
+
 
     // Run the vis for the first time
     update(bubbleData);

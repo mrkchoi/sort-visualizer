@@ -1,8 +1,8 @@
 const sorter = require("sort-algorithms-js");
 const jssort = require("js-sorting-algorithms");
 // import { setupRandomInput } from '../algorithms/setup_input';
-// const { PerformanceObserver, performance } = require("perf_hooks");
-// let fs = require('fs');
+const { PerformanceObserver, performance } = require("perf_hooks");
+let fs = require('fs');
 
 const setupRandomInput = function(inputSize) {
   let arr = [];
@@ -31,41 +31,52 @@ const setupRandomInput = function(inputSize) {
 };
 
 // module.exports.runAllSorts = function(input) {
+  // let allSorts = {
+  //   inputSize: [],
+  //   maxTime: [],
+  //   bubbleSort: [],
+  //   selectionSort: [],
+  //   insertionSort: [],
+  //   radixSort: [],
+  //   heapSort: [],
+  //   quickSort: [],
+  //   mergeSort: [],
+  //   shellSort: []
+  // };
 
-  let allSorts = {
-    inputSize: [],
-    maxTime: [],
-    bubbleSort: [],
-    selectionSort: [],
-    insertionSort: [],
-    radixSort: [],
-    heapSort: [],
-    quickSort: [],
-    mergeSort: [],
-    shellSort: []
-  };
+let allData = [];
+
+
 
 function createResultsObjects() {
-  let sizes = [10, 50, 100, 150, 200, 250, 300, 350, 400, 500, 600, 700, 800, 900, 1000, 1250, 1500, 1750, 2000, 2250, 2500, 2750, 3000, 3250, 3500, 3750, 4000, 4250, 4500, 4750, 5000, 5250, 5500, 5750, 6000];
+  let inputSizes = [];
 
-  for (let i = 0; i < sizes.length; i++) {
-    runAllSorts(sizes[i], sizes);
+  for (let i = 10; i <= 5000; i += 10) {
+    inputSizes.push(i);
   }
 
-  return allSorts;
+  
+
+  for (let i = 0; i < inputSizes.length; i++) {
+    allData.push(runAllSorts(inputSizes[i]));
+  }
+
+  return allData;
 }
 
 // console.log(createResultsObjects());
-// let res = createResultsObjects();
-// fs.writeFile("sortData.json", JSON.stringify(res), function(err) {
-//   if (err) {
-//     console.log(err);
-//   }
-// });
+let res = createResultsObjects();
+fs.writeFile("allSortData.json", JSON.stringify(res), function(err) {
+  if (err) {
+    console.log(err);
+  }
+});
 
-function runAllSorts(inputSize, sizes) {
-  let times = [];
-  allSorts.inputSize.push(inputSize);
+function runAllSorts(inputSize) {
+  let currentData = {
+    "sorts": [],
+    "inputSize": inputSize
+  };
 
   let randommizedInput = setupRandomInput(inputSize);
 
@@ -181,7 +192,20 @@ function runAllSorts(inputSize, sizes) {
   //   `shellSort took: ${timeShell} milliseconds`
   // );
 
-  times.push(
+
+  // Format data shape
+
+  let sortNames = [
+    'bubble sort',
+    'selection sort',
+    'insertion sort',
+    'radix sort',
+    'heap sort',
+    'quick sort',
+    'merge sort',
+    'shell sort'
+  ];
+  let allTimes = [
     timeBubble,
     timeSelection,
     timeInsertion,
@@ -190,21 +214,24 @@ function runAllSorts(inputSize, sizes) {
     timeQuick,
     timeMerge,
     timeShell
-  );
+  ];
 
-  let max = Math.max(...times);
+  sortNames.forEach((name, idx) => {
+    currentData["sorts"].push(
+      {
+        "sort": sortNames[idx],
+        "time": allTimes[idx],
+        "inputSize": inputSize
+      }
+    );
+  });
 
-  allSorts.maxTime.push(max);
-  allSorts.bubbleSort.push([inputSize, timeBubble]);
-  allSorts.selectionSort.push(inputSize, timeSelection);
-  allSorts.insertionSort.push(inputSize, timeInsertion);
-  allSorts.radixSort.push(inputSize, timeRadix);
-  allSorts.heapSort.push(inputSize, timeHeap);
-  allSorts.quickSort.push(inputSize, timeQuick);
-  allSorts.mergeSort.push(inputSize, timeMerge);
-  allSorts.shellSort.push(inputSize, timeShell);
+  let currentMaxTime = Math.max(...allTimes);
 
-  return allSorts;
+  currentData["currentMaxTime"] = currentMaxTime;
+
+
+  return currentData;
 }
 
 // runAllSort(6000);

@@ -1,6 +1,9 @@
 // import regeneratorRuntime from "regenerator-runtime";
 import _ from 'lodash';
 import './d3.js';
+
+// import './visualize/sort';
+
 // import { runBubbleSort } from './algorithms/bubble_sort.js';
 // import './algorithms/merge_sort';
 // import './algorithms/bubble_sort';
@@ -13,9 +16,10 @@ import './d3.js';
 // import './test/gapminder.js';
 // import './algorithms/quick_sort';
 // import './algorithms/big_o_chart';
-import './algorithms/all_sorts';
-import { generateChart } from './algorithms/big_o_chart';
+// import './algorithms/all_sorts';
+// import { generateChart } from './algorithms/big_o_chart';
 // import { generateChart } from './algorithms/big_o_chart-test';
+import { generateBubbleChart } from './graph/bubble_chart';
 
 
 let bubbleSortBtn = document.querySelector('.btn__bubblesort');
@@ -24,8 +28,12 @@ bubbleSortBtn.addEventListener('click', handleSortClick);
 let svgCanvas = document.querySelector('#chart-area');
 
 document.addEventListener('DOMContentLoaded', () => {
-    generateChart();
+//     generateChart();
+  // console.log(setupRandomInput(10)); 
+  generateBubbleChart();
+
 });
+
 
 function handleSortClick(e) {
   e.preventDefault();
@@ -38,6 +46,7 @@ function handleSortClick(e) {
   // run sort
   let targetClassList = e.target.classList;
   if (targetClassList.contains("btn__bubblesort")) {
+    // generateBubbleChart();
     // generateChart();
     // runBubbleSort();
   } else if (targetClassList.contains("btn__quicksort")) {
@@ -48,7 +57,7 @@ function handleSortClick(e) {
 }
 
 
-// console.log(setupRandomInput(20));
+// console.log(setupRandomInput (20));
 
 
 
