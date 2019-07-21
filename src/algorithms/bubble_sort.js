@@ -1,4 +1,4 @@
-const setupRandomInput = require('./setup_input');
+const { setupRandomInput } = require('./setup_input');
 
 // /////////////// 
 // // bubble sort
@@ -6,7 +6,29 @@ const setupRandomInput = require('./setup_input');
 
 // array creation
 function runBubbleSort() {
-  let shuffledArr = setupRandomInput(50);
+  // let shuffledArr = [
+  //   9,
+  //   8,
+  //   12,
+  //   16,
+  //   14,
+  //   13,
+  //   11,
+  //   10,
+  //   20,
+  //   19,
+  //   15,
+  //   7,
+  //   1,
+  //   6,
+  //   17,
+  //   5,
+  //   2,
+  //   4,
+  //   18,
+  //   3
+  // ];
+  let shuffledArr = setupRandomInput(10);
 
   // this is our final input data
   let data = [];
@@ -33,7 +55,13 @@ function runBubbleSort() {
   };
 
   // invoke algorithm and create sorted states in a 2d array
+  let t0 = performance.now();
   bubbleSort(shuffledArr);
+  let t1 = performance.now();
+  console.log(`bubbleSort took ${t1 - t0} milliseconds`);
+
+
+
 
   ////////////////////////
   // d3.js
@@ -57,10 +85,16 @@ function runBubbleSort() {
   let iteration = 0;
 
   // Scales
+  // let x = d3
+  //   .scaleBand()
+  //   .domain([0, data[0].length])
+  //   .range([0, width])
+  //   .padding(.1);
   let x = d3
-    .scaleLinear()
-    .domain([0, data[0].length])
+    .scaleBand()
+    // .domain([0, data[0].length])
     .range([0, width]);
+
   let y = d3
     .scaleLinear()
     .domain([0, data[0].length])
@@ -74,7 +108,7 @@ function runBubbleSort() {
   //   .domain([0, data[0].length]);
   let color = d3
     .scaleSequential(d3.interpolateCubehelixDefault)
-    .domain([0, data[0].length]);
+    .domain([0, data[0].length+1]);
   // let color = d3.scaleOrdinal(d3.schemePastel1);
   // let color = d3.scaleOrdinal([
   //   "#8dd3c7",
@@ -91,7 +125,7 @@ function runBubbleSort() {
   //   "#ffed6f"
   // ]);
 
-  // Labels
+  // // Labels
   // let xLabel = g
   //   .append("text")
   //   .attr("y", height + 50)
@@ -116,7 +150,7 @@ function runBubbleSort() {
     .attr("text-anchor", "middle")
     .text("0");
 
-  // X Axis
+  // // X Axis
   // let xAxisCall = d3
   //   .axisBottom(x);
   // g.append("g")
@@ -137,52 +171,63 @@ function runBubbleSort() {
   let interval = d3.interval(function() {
     // At the end of our data, loop back
     time = time < data.length ? time + 1 : 0;
-    iteration = iteration < data[0].length ? iteration + 1 : 0;
+    // iteration = iteration < data[0].length ? iteration + 1 : 0;
     // console.log(data);
     update(data[time]);
     if (time === data.length - 1) {
       interval.stop();
     }
-  }, 1);
+  }, 100);
 
   // First run of the visualization
   update(data[0]);
   // });
 
-  function update(data) {
+  function update(curData) {
+    console.log(curData);
     // Standard transition time for the visualization
-    let t = d3.transition().duration(1);
+    let t = d3.transition().duration(100);
+
+    x.domain(curData);
 
     // JOIN new data with old elements.
-    let circles = g.selectAll("rect").data(data, function(d) {
+    let rects = g.selectAll("rect").data(curData, function(d) {
       return d;
     });
 
     // EXIT old elements not present in new data.
-    circles
+    rects
       .exit()
       .attr("class", "exit")
       .remove();
 
     // ENTER new elements present in new data.
-    circles
+    // debugger
+    rects
       .enter()
       .append("rect")
       .attr("class", "enter")
       .attr("fill", function(d) {
         return color(d);
       })
-      .merge(circles)
+      .attr("x", function(d, i) {
+        return x(i);
+      })
+      .attr("y", function(d, i) {
+        // return 0;
+        return y(d);
+      })
+      .merge(rects)
       .transition(t)
       .attr("y", function(d, i) {
         // return 0;
         return y(d);
       })
       .attr("x", function(d, i) {
-        return x(i);
+        return x(i+1);
       })
       .attr("width", function(d) {
-        return 14;
+        return x.bandwidth();
         // return d;
       })
       .attr("height", function(d) {
@@ -193,6 +238,8 @@ function runBubbleSort() {
     // Update the time label
     timeLabel.text(+time);
   }
+
+  // console.log(data);
     
 }
 

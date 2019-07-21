@@ -12,3 +12,14 @@
 #chart-area svg {
   /* border: 1px solid gray; */
 }
+
+
+.line__bubble {
+  stroke: black;
+}
+
+
+.line {
+  stroke: black;
+  fill: none;
+}

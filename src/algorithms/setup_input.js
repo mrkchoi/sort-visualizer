@@ -1,4 +1,4 @@
-function setupRandomInput(inputSize) {
+module.exports.setupRandomInput = function (inputSize) {
   let arr = [];
   for (let i = 1; i <= inputSize; i++) {
     arr.push(i);
@@ -24,6 +24,3 @@ function setupRandomInput(inputSize) {
   return shuffle(arr);
 }
 
-module.exports = {
-  setupRandomInput: setupRandomInput
-};
