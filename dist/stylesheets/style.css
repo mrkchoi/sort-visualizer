@@ -9,6 +9,12 @@
   fill: white; 
 }
 
+#chart-area {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
 #chart-area svg {
   /* border: 1px solid gray; */
   cursor: pointer;

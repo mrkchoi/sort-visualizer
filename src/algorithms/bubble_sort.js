@@ -28,7 +28,7 @@ function runBubbleSort() {
   //   18,
   //   3
   // ];
-  let shuffledArr = setupRandomInput(100);
+  let shuffledArr = setupRandomInput(55);
 
   // this is our final input data
   let data = [];
@@ -169,7 +169,7 @@ function runBubbleSort() {
   let timeLabel = g
     .append("text")
     .attr("y", height + 60)
-    .attr("x", width - 40)
+    .attr("x", width - 80)
     .attr("font-size", "40px")
     .attr("opacity", "0.4")
     .attr("text-anchor", "middle")
