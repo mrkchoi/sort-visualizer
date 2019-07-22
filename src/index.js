@@ -23,8 +23,8 @@ import { generateBubbleChart } from './graph/bubble_chart';
 import './graph/gdp';
 
 
-let bubbleSortBtn = document.querySelector('.btn__bubblesort');
-bubbleSortBtn.addEventListener('click', handleSortClick);
+// let bubbleSortBtn = document.querySelector('.btn__bubblesort');
+// bubbleSortBtn.addEventListener('click', handleSortClick);
 
 let svgCanvas = document.querySelector('#chart-area');
 
@@ -36,26 +36,26 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 
-function handleSortClick(e) {
-  e.preventDefault();
+// function handleSortClick(e) {
+//   e.preventDefault();
 
-  // reset svg canvas
-  svgCanvas.innerHTML = '';
+//   // reset svg canvas
+//   svgCanvas.innerHTML = '';
 
-  console.log("clicked!");
+//   console.log("clicked!");
   
-  // run sort
-  let targetClassList = e.target.classList;
-  if (targetClassList.contains("btn__bubblesort")) {
-    // generateBubbleChart();
-    // generateChart();
-    // runBubbleSort();
-  } else if (targetClassList.contains("btn__quicksort")) {
-    // runQuickSort();
-  } else if (targetClassList.contains("btn__mergesort")) {
-    // runMergeSort();
-  }
-}
+//   // run sort
+//   let targetClassList = e.target.classList;
+//   if (targetClassList.contains("btn__bubblesort")) {
+//     // generateBubbleChart();
+//     // generateChart();
+//     // runBubbleSort();
+//   } else if (targetClassList.contains("btn__quicksort")) {
+//     // runQuickSort();
+//   } else if (targetClassList.contains("btn__mergesort")) {
+//     // runMergeSort();
+//   }
+// }
 
 
 // console.log(setupRandomInput (20));
