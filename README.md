@@ -2,6 +2,7 @@
 ## Background and Overview
 A visual exploration of sorting algorithms written in JS &amp; d3.js
 
+(Live Site)[https://mrkchoi.github.io/sort-visualizer/]
 ## Functionality & MVP
 Users will be able to:
  - [X] Visualize sorting algorithms with realtime iterative stepping
