@@ -15,14 +15,14 @@ The project will also include:
  - [X] Data visualization built with d3.js
 
 ## Wireframes
-The app will be a single screen, housing a primary d3.js container where algorithms are rendering in realtime.
+The app houses a primary d3.js container where algorithms are rendered in realtime.
 
 ![Realtime Processing](http://kchoi.io/assets/images/bubble-sort-vis.png)
 ![Comparison Chart](http://kchoi.io/assets/images/sort-visualizer-screenshot.png)
 
 
 ## Architecture & Technologies
-This app will be implemented using the following technologies:
+This app is implemented using the following technologies:
   * Vanilla JavaScript - structure and logic
   * d3.js - DOM manipulation and rendering
   * Babel for transpilation
