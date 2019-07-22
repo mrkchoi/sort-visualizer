@@ -28,7 +28,7 @@ function runBubbleSort() {
   //   18,
   //   3
   // ];
-  let shuffledArr = setupRandomInput(10);
+  let shuffledArr = setupRandomInput(100);
 
   // this is our final input data
   let data = [];
@@ -202,7 +202,7 @@ function runBubbleSort() {
     if (time === data.length - 1) {
       interval.stop();
     }
-  }, 250);
+  }, 1);
 
   // First run of the visualization
   update(data[0]);
@@ -211,7 +211,7 @@ function runBubbleSort() {
   function update(curData) {
     console.log(curData);
     // Standard transition time for the visualization
-    let t = d3.transition().duration(250);
+    let t = d3.transition().duration(1);
 
     x.domain(curData);
 

@@ -4,7 +4,7 @@ import './d3.js';
 
 // import './visualize/sort';
 
-// import { runBubbleSort } from './algorithms/bubble_sort.js';
+import { runBubbleSort } from './algorithms/bubble_sort.js';
 // import './algorithms/merge_sort';
 // import './algorithms/bubble_sort';
 
@@ -30,6 +30,8 @@ let svgCanvas = document.querySelector('#chart-area');
 
 document.addEventListener('DOMContentLoaded', () => {
 //     generateChart();
+  runBubbleSort();
+
   // console.log(setupRandomInput(10)); 
   generateBubbleChart();
 
