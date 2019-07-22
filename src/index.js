@@ -20,6 +20,7 @@ import './d3.js';
 // import { generateChart } from './algorithms/big_o_chart';
 // import { generateChart } from './algorithms/big_o_chart-test';
 import { generateBubbleChart } from './graph/bubble_chart';
+import './graph/gdp';
 
 
 let bubbleSortBtn = document.querySelector('.btn__bubblesort');

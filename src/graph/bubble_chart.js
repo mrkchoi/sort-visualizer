@@ -1,7 +1,7 @@
 module.exports.generateBubbleChart = function() {
-  var margin = { left: 80, right: 20, top: 50, bottom: 100 };
+  var margin = { left: 80, right: 150, top: 50, bottom: 100 };
   var height = 500 - margin.top - margin.bottom,
-    width = 800 - margin.left - margin.right;
+    width = 900 - margin.left - margin.right;
 
   var g = d3
     .select("#chart-area")
@@ -18,6 +18,11 @@ module.exports.generateBubbleChart = function() {
     .scaleLinear()
     .range([0, width])
     .domain([1, 5000]);
+  // var y = d3
+  //   .scaleLog()
+  //   .base(10)
+  //   .range([height, 0])
+  //   // .domain([0, 100]);
   var y = d3
     .scaleLinear()
     .range([height, 0])
@@ -26,7 +31,7 @@ module.exports.generateBubbleChart = function() {
     .scaleLinear()
     .range([0, 100])
     .domain([0, 80]);
-  var sortColor = d3.scaleOrdinal(d3.schemePastel1);
+  var sortColor = d3.scaleOrdinal(d3.schemePastel2);
 
   // Labels
   var xLabel = g
@@ -83,7 +88,7 @@ module.exports.generateBubbleChart = function() {
 
   let legend = g
     .append("g")
-    .attr("transform", `translate(${width - 10}, ${height - 225})`);
+    .attr("transform", `translate(${width + 125}, ${height - 225})`);
 
   sortNames.forEach(function(sort, i) {
     let legendRow = legend
@@ -113,9 +118,12 @@ module.exports.generateBubbleChart = function() {
     //   return inputSize.sorts;
     // })
     // Run the code every 0.1 second
-    d3.interval(function() {
+    let interval = d3.interval(function() {
       // At the end of our data, loop back
       time = time < 5000 ? time + 10 : 0;
+      if (time === 5000) {
+        interval.stop();
+      }
       update(data[time/10]);
     }, 25);
 
@@ -128,6 +136,7 @@ module.exports.generateBubbleChart = function() {
 
     // y.domain(data.currentMaxTime);
     // debugger;
+    // sortColor.domain([0, data.length + 1]);
 
     let formattedData = data["sorts"];
     // Standard transition time for the visualization
@@ -138,6 +147,7 @@ module.exports.generateBubbleChart = function() {
     var circles = g.selectAll("circle").data(formattedData, function(d) {
       return d["sort"];
     });
+
 
     // debugger;
     // EXIT old elements not present in new data.
@@ -165,11 +175,11 @@ module.exports.generateBubbleChart = function() {
       })
       .attr("r", function(d) {
         // debugger;
-        return 5;
+        return 10;
         // return Math.sqrt(area(d.time * 100) / Math.PI);
       });
 // debugger;
     // Update the time label
-    timeLabel.text(+(time));
+    timeLabel.text(+(time) + 10);
   }
 };

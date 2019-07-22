@@ -51,7 +51,7 @@ let allData = [];
 function createResultsObjects() {
   let inputSizes = [];
 
-  for (let i = 10; i <= 5000; i += 10) {
+  for (let i = 0; i <= 5000; i += 100) {
     inputSizes.push(i);
   }
 

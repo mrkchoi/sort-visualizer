@@ -68,3 +68,60 @@
   },
 ]
 
+[
+  {
+    "sorts": [
+      {
+        "sort": "bubble sort",
+        "time": 17.148396998643875,
+        "inputSize": 5000
+      },
+      {
+        "sort": "selection sort",
+        "time": 10.055069983005524,
+        "inputSize": 5000
+      },
+      {
+        "sort": "insertion sort",
+        "time": 15.673156976699829,
+        "inputSize": 5000
+      },
+      {
+        "sort": "radix sort",
+        "time": 1.7403109967708588,
+        "inputSize": 5000
+      },
+      {
+        "sort": "heap sort",
+        "time": 0.8763439953327179,
+        "inputSize": 5000
+      },
+      {
+        "sort": "quick sort",
+        "time": 23.07947301864624,
+        "inputSize": 5000
+      },
+      {
+        "sort": "merge sort",
+        "time": 0.48159298300743103,
+        "inputSize": 5000
+      },
+      {
+        "sort": "shell sort",
+        "time": 69.4279719889164,
+        "inputSize": 5000
+      }
+    ],
+    "inputSize": 5000,
+    "currentMaxTime": 69.4279719889164
+  }
+]
+
+// bubble sort:     O(n^2)
+// selection sort:  O(n^2)
+// insertion sort:  O(n^2)
+// radix sort:      O(n+k)
+// heap sort:       O(n*log(n))
+// quick sort:      O(n^2)
+// merge sort:      O(n*log(n))
+// shell sort:      O(n^2)
