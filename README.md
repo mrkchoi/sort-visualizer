@@ -17,7 +17,7 @@ The project will also include:
 ## Wireframes
 The app will be a single screen, housing a primary d3.js container where algorithms are rendering in realtime.
 
-![wireframe](pending...)
+![wireframe](http://kchoi.io/assets/images/sort-visualizer-screenshot.png)
 
 ## Architecture & Technologies
 This app will be implemented using the following technologies:
