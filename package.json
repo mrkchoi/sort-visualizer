@@ -32,7 +32,7 @@
     "d3-scale": "^3.0.0",
     "d3-scale-chromatic": "^1.3.3",
     "js-sorting-algorithms": "^1.0.6",
-    "lodash": "^4.17.14",
+    "lodash": "^4.17.19",
     "normalize.css": "^8.0.1",
     "regenerator-runtime": "^0.13.3",
     "sort-algorithms-js": "^2.1.2",
